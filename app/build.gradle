@@ -25,7 +25,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            buildConfigField "String", "API_URL", '"https://api.github.com/"'
+            buildConfigField "String", "CLIENT_ID", '"185f9c2062e1409baebd5687ca08ad5e"'
+            buildConfigField "String", "CLIENT_SECRET", '"3837a661070a44a38d08611777681074"'
+            buildConfigField "String", "API_BASE_URL ", '"https://api.spotify.com/v1/"'
+            buildConfigField "String", "API_AUTH_URL", '"https://accounts.spotify.com/api/"'
         }
     }
     compileOptions {

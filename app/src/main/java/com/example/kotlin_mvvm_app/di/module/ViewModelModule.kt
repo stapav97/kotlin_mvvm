@@ -2,6 +2,7 @@ package com.example.kotlin_mvvm_app.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.kotlin_mvvm_app.ui.login.LoginViewModel
 import com.example.kotlin_mvvm_app.ui.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
@@ -12,10 +13,10 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class ViewModelModule {
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(LoginViewModel::class)
-//    abstract fun bindsLoginViewModel(vm: LoginViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoginViewModel::class)
+    abstract fun bindsLoginViewModel(vm: LoginViewModel): ViewModel
 
     @Binds
     @IntoMap

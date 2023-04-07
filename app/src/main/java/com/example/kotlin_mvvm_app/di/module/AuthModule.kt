@@ -1,7 +1,7 @@
 package com.example.kotlin_mvvm_app.di.module
 
 import com.example.kotlin_mvvm_app.BuildConfig
-import com.example.kotlin_mvvm_app.data.network.ApiService
+import com.example.kotlin_mvvm_app.data.network.AuthApiService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -13,11 +13,11 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+class AuthModule {
 
     @Singleton
     @Provides
-    fun providesRetrofit(): Retrofit {
+    fun provideAuthRetrofit(): Retrofit {
 
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -33,15 +33,16 @@ class NetworkModule {
 
         return Retrofit.Builder()
             .client(okHttpBuilder.build())
-            .baseUrl(BuildConfig.API_BASE_URL)
+            .baseUrl(BuildConfig.API_AUTH_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
+
     @Singleton
     @Provides
-    fun providesApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun providesAuthApiService(retrofit: Retrofit): AuthApiService {
+        return retrofit.create(AuthApiService::class.java)
     }
 
 }

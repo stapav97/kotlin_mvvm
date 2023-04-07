@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">kotlin_mvvm_app</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">Login</string>
+    <string name="login_via_Spotify_to_continue">Login via Spotify to continue</string>
+
+    <string name="server_connection_error">Server connection error</string>
+    <string name="something_went_wrong">Something went wrong</string>
+
+    <string name="title_label">Title</string>
+    <string name="description_label">Description</string>
 </resources>
