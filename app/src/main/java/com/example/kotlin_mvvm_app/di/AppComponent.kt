@@ -2,7 +2,6 @@ package com.example.kotlin_mvvm_app.di
 
 import android.content.Context
 import com.example.kotlin_mvvm_app.di.module.AppModule
-import com.example.kotlin_mvvm_app.di.module.AuthModule
 import com.example.kotlin_mvvm_app.di.module.NetworkModule
 import com.example.kotlin_mvvm_app.di.module.ViewModelModule
 import com.example.kotlin_mvvm_app.ui.MainActivity
@@ -18,7 +17,6 @@ import javax.inject.Singleton
     modules = [
         AppModule::class,
         NetworkModule::class,
-        AuthModule::class,
         ViewModelModule::class
     ]
 )
