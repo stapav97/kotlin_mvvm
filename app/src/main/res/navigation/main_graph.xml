@@ -9,7 +9,8 @@
         android:id="@+id/loginFragment"
         android:name="com.example.kotlin_mvvm_app.ui.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/login_fragment" />
+        tools:layout="@layout/login_fragment" >
+    </fragment>
 
     <fragment
         android:id="@+id/splashFragment"
@@ -20,5 +21,11 @@
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
+    <include app:graph="@navigation/bottom_menu_graph" />
+
+    <action
+        android:id="@+id/action_to_bottom_menu_graph"
+        app:destination="@id/bottom_menu_graph" />
 
 </navigation>

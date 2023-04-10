@@ -8,4 +8,5 @@ data class User(
     @PrimaryKey
     val id: Int = 0,
     val token: String = "",
+    val refresh_token: String = ""
 )

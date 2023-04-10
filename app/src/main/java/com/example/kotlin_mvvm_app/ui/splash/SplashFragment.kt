@@ -20,18 +20,32 @@ class SplashFragment : BaseFragment(R.layout.splash_fragment) {
         super.initUI()
         mViewModel = newViewModelWithArgs()
 
+        mViewModel.checkUserInDBOnStart()
         observeState()
-        navigateToLogin()
     }
 
     private fun observeState() {
-
+        mViewModel.state().observe(viewLifecycleOwner) { state ->
+            if (state.userFromDB != null)
+                if (state.userFromDB.token.isNotEmpty()) {
+                    navigateToFirst()
+                } else {
+                    navigateToLogin()
+                }
+        }
     }
 
     private fun navigateToLogin() {
         Reporter.appAction(logTag, "navigateToLogin")
 
         val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+        binding.root.findNavController().navigate(action)
+    }
+
+    private fun navigateToFirst() {
+        Reporter.appAction(logTag, "navigateToFirst")
+
+        val action = SplashFragmentDirections.actionToBottomMenuGraph()
         binding.root.findNavController().navigate(action)
     }
 }

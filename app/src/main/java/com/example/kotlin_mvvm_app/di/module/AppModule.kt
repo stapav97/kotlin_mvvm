@@ -27,9 +27,9 @@ class AppModule {
     fun providesRepository(apiService: ApiService): NetworkRepository =
         NetworkRepository(apiService)
 
-    @Singleton
-    @Provides
-    fun providesContext(app: App): Context {
-        return app.applicationContext;
-    }
+//    @Singleton
+//    @Provides
+//    fun providesContext(app: App): Context {
+//        return app.applicationContext;
+//    }
 }
