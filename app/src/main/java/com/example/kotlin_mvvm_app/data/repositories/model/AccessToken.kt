@@ -8,5 +8,5 @@ data class AccessToken(
     @SerializedName("token_type")
     val tokenType: String = "",
     @SerializedName("refresh_token")
-    val refresh_token: String = "",
+    val refreshToken: String = "",
 )

@@ -15,4 +15,12 @@ interface AuthApiService {
         @Field("grant_type") grantType: String,
         @Field("code") code: String
     ): AccessToken
+
+    @FormUrlEncoded
+    @POST("token")
+    suspend fun getRefreshToken(
+        @Header("Authorization") authHeader: String,
+        @Field("grant_type") grantType: String,
+        @Field("refresh_token") refreshToken: String?
+    ): AccessToken
 }

@@ -17,19 +17,41 @@ import javax.inject.Inject
 
 
 class AuthRepository @Inject constructor(
-    private val authApiService: AuthApiService
+    private val authApiService: AuthApiService,
+    private val mDatabaseRepository: DatabaseRepository
 ) {
     suspend fun getAccessToken(code: String): Flow<Resource<AccessToken>> = flow {
         emit(Resource.progress())
         try {
             val string = BuildConfig.CLIENT_ID + ":" + BuildConfig.CLIENT_SECRET
-            val encodedString: String = "Basic " + Base64.getEncoder().encodeToString(string.toByteArray())
+            val encodedString: String =
+                "Basic " + Base64.getEncoder().encodeToString(string.toByteArray())
             val response = authApiService.getAccessToken(
                 encodedString,
                 BuildConfig.AUTHORIZATION_CALLBACK_URL,
                 "authorization_code",
                 code
             )
+            emit(Resource(response))
+        } catch (exception: Exception) {
+            when (exception) {
+                is HttpException, is SocketTimeoutException, is UnknownHostException -> {
+                    emit(Resource(error = TextResource(textResId = R.string.server_connection_error)))
+                    return@flow
+                }
+                else -> throw exception
+            }
+        }
+    }
+
+    suspend fun getRefreshToken(): Flow<Resource<AccessToken>> = flow {
+        emit(Resource.progress())
+        try {
+            val string = BuildConfig.CLIENT_ID + ":" + BuildConfig.CLIENT_SECRET
+            val encodedString: String =
+                "Basic " + Base64.getEncoder().encodeToString(string.toByteArray())
+            val refreshToken: String? = mDatabaseRepository.getRefreshToken()
+            val response = authApiService.getRefreshToken(encodedString, "refresh_token", refreshToken)
             emit(Resource(response))
         } catch (exception: Exception) {
             when (exception) {

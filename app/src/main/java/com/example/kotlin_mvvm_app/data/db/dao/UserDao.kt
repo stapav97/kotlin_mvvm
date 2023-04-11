@@ -18,4 +18,7 @@ interface UserDao {
     @Query("SELECT token FROM user LIMIT 1")
     suspend fun getUserToken(): String?
 
+    @Query("SELECT refresh_token FROM user LIMIT 1")
+    suspend fun getRefreshToken(): String?
+
 }

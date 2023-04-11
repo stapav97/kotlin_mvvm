@@ -18,4 +18,8 @@ class DatabaseRepository @Inject constructor(
     suspend fun getUserToken(): String?{
         return mDatabase.userDao().getUserToken()
     }
+
+    suspend fun getRefreshToken(): String?{
+        return mDatabase.userDao().getRefreshToken()
+    }
 }
