@@ -1,11 +1,11 @@
-package com.example.kotlin_mvvm_app.ui.second
+package com.example.kotlin_mvvm_app.ui.search
 
 import com.example.kotlin_mvvm_app.ui.MainViewCommandProcessor
 import com.example.kotlin_mvvm_app.ui.base.BaseViewModel
 import com.example.kotlin_mvvm_app.utils.logTag
 import javax.inject.Inject
 
-class SecondViewModel @Inject constructor(
+class SearchViewModel @Inject constructor(
     private val mMainCommands: MainViewCommandProcessor
 ) : BaseViewModel() {
 

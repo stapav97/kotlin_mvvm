@@ -12,10 +12,10 @@
         tools:layout="@layout/first_fragment"/>
 
     <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.example.kotlin_mvvm_app.ui.second.SecondFragment"
-        android:label="SecondFragment"
-        tools:layout="@layout/second__fragment"/>
+        android:id="@+id/searchFragment"
+        android:name="com.example.kotlin_mvvm_app.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/search_fragment"/>
 
     <fragment
         android:id="@+id/thirdFragment"

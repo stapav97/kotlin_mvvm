@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.kotlin_mvvm_app.ui.first.FirstViewModel
 import com.example.kotlin_mvvm_app.ui.fourth.FourthViewModel
 import com.example.kotlin_mvvm_app.ui.login.LoginViewModel
-import com.example.kotlin_mvvm_app.ui.second.SecondViewModel
+import com.example.kotlin_mvvm_app.ui.search.SearchViewModel
 import com.example.kotlin_mvvm_app.ui.splash.SplashViewModel
 import com.example.kotlin_mvvm_app.ui.third.ThirdViewModel
 import dagger.Binds
@@ -27,8 +27,8 @@ abstract class ViewModelModule {
     abstract fun bindsThirdViewModel(vm: ThirdViewModel): ViewModel
     @Binds
     @IntoMap
-    @ViewModelKey(SecondViewModel::class)
-    abstract fun bindsSecondViewModel(vm: SecondViewModel): ViewModel
+    @ViewModelKey(SearchViewModel::class)
+    abstract fun bindsSearchViewModel(vm: SearchViewModel): ViewModel
     @Binds
     @IntoMap
     @ViewModelKey(FirstViewModel::class)
