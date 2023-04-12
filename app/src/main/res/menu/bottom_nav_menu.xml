@@ -11,9 +11,9 @@
         android:icon="@drawable/baseline_search_24"
         android:title="Search" />
     <item
-        android:id="@+id/thirdFragment"
+        android:id="@+id/likedFragment"
         android:icon="@drawable/baseline_folder_24"
-        android:title="Third" />
+        android:title="Liked" />
     <item
         android:id="@+id/fourthFragment"
         android:icon="@drawable/baseline_menu_24"

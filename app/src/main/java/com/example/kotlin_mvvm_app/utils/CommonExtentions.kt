@@ -4,7 +4,7 @@ fun Any.logTag(): String {
     return this::class.java.simpleName
 }
 
-//fun String.tokenFormatter() : String{
-//    return "bearer $this"
-//}
+fun String.tokenFormatter() : String{
+    return "Bearer $this"
+}
 

@@ -16,4 +16,6 @@
 
     <string name="title_label">Title</string>
     <string name="description_label">Description</string>
+    <string name="search">Search</string>
+    <string name="list_empty">Search list empty</string>
 </resources>

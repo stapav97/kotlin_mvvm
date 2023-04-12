@@ -7,7 +7,7 @@ import com.example.kotlin_mvvm_app.ui.fourth.FourthViewModel
 import com.example.kotlin_mvvm_app.ui.login.LoginViewModel
 import com.example.kotlin_mvvm_app.ui.search.SearchViewModel
 import com.example.kotlin_mvvm_app.ui.splash.SplashViewModel
-import com.example.kotlin_mvvm_app.ui.third.ThirdViewModel
+import com.example.kotlin_mvvm_app.ui.liked.LikedViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -23,8 +23,8 @@ abstract class ViewModelModule {
     abstract fun bindsFourthViewModel(vm: FourthViewModel): ViewModel
     @Binds
     @IntoMap
-    @ViewModelKey(ThirdViewModel::class)
-    abstract fun bindsThirdViewModel(vm: ThirdViewModel): ViewModel
+    @ViewModelKey(LikedViewModel::class)
+    abstract fun bindsLikedViewModel(vm: LikedViewModel): ViewModel
     @Binds
     @IntoMap
     @ViewModelKey(SearchViewModel::class)

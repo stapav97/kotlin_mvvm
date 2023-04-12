@@ -2,7 +2,6 @@ package com.example.kotlin_mvvm_app.di.module
 
 import android.content.Context
 import androidx.room.Room
-import com.example.kotlin_mvvm_app.App
 import com.example.kotlin_mvvm_app.data.db.AppDatabase
 import com.example.kotlin_mvvm_app.data.network.ApiService
 import com.example.kotlin_mvvm_app.data.repositories.NetworkRepository
@@ -27,9 +26,4 @@ class AppModule {
     fun providesRepository(apiService: ApiService): NetworkRepository =
         NetworkRepository(apiService)
 
-//    @Singleton
-//    @Provides
-//    fun providesContext(app: App): Context {
-//        return app.applicationContext;
-//    }
 }

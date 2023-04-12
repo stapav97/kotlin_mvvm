@@ -18,10 +18,10 @@
         tools:layout="@layout/search_fragment"/>
 
     <fragment
-        android:id="@+id/thirdFragment"
-        android:name="com.example.kotlin_mvvm_app.ui.third.ThirdFragment"
-        android:label="ThirdFragment"
-        tools:layout="@layout/third_fragment"/>
+        android:id="@+id/likedFragment"
+        android:name="com.example.kotlin_mvvm_app.ui.liked.LikedFragment"
+        android:label="LikedFragment"
+        tools:layout="@layout/liked_fragment"/>
 
     <fragment
         android:id="@+id/fourthFragment"
