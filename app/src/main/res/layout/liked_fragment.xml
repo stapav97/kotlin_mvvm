@@ -4,8 +4,16 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Liked fragment"
+        android:id="@+id/emptyList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/list_empty" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

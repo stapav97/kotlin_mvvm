@@ -112,10 +112,12 @@ class MainActivity : AppCompatActivity() {
     fun navigateToSpotifyLogin() {
         Reporter.appAction(logTag, "navigateToSpotifyLogin")
 
+        val scope = "user-library-read"
+
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://accounts.spotify.com/authorize?client_id=${BuildConfig.CLIENT_ID}&redirect_uri=${BuildConfig.AUTHORIZATION_CALLBACK_URL}&response_type=code")
+                Uri.parse("https://accounts.spotify.com/authorize?client_id=${BuildConfig.CLIENT_ID}&redirect_uri=${BuildConfig.AUTHORIZATION_CALLBACK_URL}&scope=${scope}&response_type=code")
             )
         )
     }
