@@ -10,6 +10,7 @@ import com.example.kotlin_mvvm_app.utils.Reporter
 import com.example.kotlin_mvvm_app.utils.logTag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -29,20 +30,19 @@ class SplashViewModel @Inject constructor(
 
     init {
         mState = MutableLiveData(State())
+        checkUserInDBOnStart()
     }
 
-    fun checkUserInDBOnStart() {
-        Reporter.appAction(logTag, "navigateToFirstFragment")
-
+    private fun checkUserInDBOnStart() {
+        Reporter.appAction(logTag, "checkUserInDBOnStart")
         val oldState = mState.value!!
-        viewModelScope.launch(Dispatchers.IO) {
-            delay(1500)
-            val user = mDatabaseRepository.getUser()
-            withContext(Dispatchers.Main) {
-                if (user != null)
-                    mState.value = oldState.copy(userFromDB = user)
+        viewModelScope.launch {
+            val user = mDatabaseRepository.getUser().collect(){data ->
+                if (data != null)
+                    mState.value = oldState.copy(userFromDB = data)
                 else
                     mState.value = oldState.copy(userFromDB = User())
+
             }
         }
     }

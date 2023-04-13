@@ -19,8 +19,6 @@ class SplashFragment : BaseFragment(R.layout.splash_fragment) {
     override fun initUI() {
         super.initUI()
         mViewModel = newViewModelWithArgs()
-
-        mViewModel.checkUserInDBOnStart()
         observeState()
     }
 

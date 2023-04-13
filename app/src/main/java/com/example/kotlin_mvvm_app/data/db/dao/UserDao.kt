@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.kotlin_mvvm_app.data.db.entity.User
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
@@ -13,12 +14,12 @@ interface UserDao {
     suspend fun insertUser(user: User)
 
     @Query("SELECT * FROM user LIMIT 1")
-    suspend fun getUser(): User?
+    fun getUser(): Flow<User?>
 
     @Query("SELECT token FROM user LIMIT 1")
-    suspend fun getUserToken(): String?
+    fun getUserToken(): Flow<String?>
 
     @Query("SELECT refresh_token FROM user LIMIT 1")
-    suspend fun getRefreshToken(): String?
+    fun getRefreshToken(): Flow<String?>
 
 }

@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
@@ -54,25 +53,18 @@ class SearchViewModel @Inject constructor(
 
     init {
         mState = MutableLiveData(State(trackList = mutableListOf()))
-        getUserPrefs()
+        getUserToken()
     }
 
-    private fun getUserPrefs() {
-        Reporter.appAction(logTag, "getUserPrefs")
-
+    private fun getUserToken() {
+        Reporter.appAction(logTag, "getUserToken")
         val oldState = mState.value!!
-        mState.value = oldState.copy(isProgress = true)
 
-        viewModelScope.launch(Dispatchers.IO) {
-
-            val userToken: String? = mDatabaseRepository.getUserToken()
-
-            withContext(Dispatchers.Main) {
-                mState.value =
-                    oldState.copy(isProgress = false, token = userToken.orEmpty().tokenFormatter())
+        viewModelScope.launch {
+            mDatabaseRepository.getUserToken().collect() { data ->
+                mState.value = oldState.copy(token = data.orEmpty().tokenFormatter())
             }
         }
-
     }
 
     private fun getSearchResult(queryString: String) {

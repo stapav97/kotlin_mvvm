@@ -42,8 +42,7 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHostFragment.navController
         bottomNavigationView = binding.bottomNavigationView
         setupWithNavController(bottomNavigationView, navController)
@@ -75,8 +74,7 @@ class MainActivity : AppCompatActivity() {
             if (state.token != "" && mLastConsumedState?.token != state.token) {
                 mViewModel.saveUserToken()
             }
-
-            if (state.userFromDB?.token != null && state.userFromDB.token.isNotEmpty()) {
+            if (!state.userFromDB?.token.isNullOrEmpty()) {
                 navigateToFirst()
             }
             mLastConsumedState = state
@@ -103,15 +101,12 @@ class MainActivity : AppCompatActivity() {
     fun handleErrorWithToastMessage(errorMessage: TextResource) {
         Reporter.appAction(logTag, "handleErrorWithToastMessage")
         Toast.makeText(
-            applicationContext,
-            errorMessage.toValue(applicationContext),
-            Toast.LENGTH_LONG
+            applicationContext, errorMessage.toValue(applicationContext), Toast.LENGTH_LONG
         ).show()
     }
 
     fun navigateToSpotifyLogin() {
         Reporter.appAction(logTag, "navigateToSpotifyLogin")
-
         val scope = "user-library-read"
 
         startActivity(

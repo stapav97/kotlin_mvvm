@@ -1,6 +1,8 @@
 package com.example.kotlin_mvvm_app.utils.wrappers
 
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 
 //==============================================================================================
 // *** Visibility ***
@@ -18,4 +20,11 @@ fun View.show(): View {
 
     visibility = View.VISIBLE
     return this
+}
+
+//==============================================================================================
+// *** Misc ***
+//==============================================================================================
+fun RecyclerView.disableItemChangeAnimation() {
+    (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
 }

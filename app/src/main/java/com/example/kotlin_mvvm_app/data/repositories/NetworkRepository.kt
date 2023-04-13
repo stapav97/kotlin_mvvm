@@ -18,12 +18,13 @@ import javax.inject.Inject
 class NetworkRepository @Inject constructor(
     private val apiService: ApiService
 ) {
+    private val pageSize: Int = 30
+    private var page: Int = 0;
     suspend fun getSearchResult(token: String, q: String, type: String, offset: Int): Flow<Resource<SearchResult>> =
         flow {
             emit(Resource.progress())
             try {
-                val limit = 10 // page length
-                val response = apiService.getSearch(token, q, type, limit, offset)
+                val response = apiService.getSearch(token, q, type, pageSize, offset)
                 emit(Resource(response))
 
             } catch (exception: Exception) {
@@ -37,12 +38,12 @@ class NetworkRepository @Inject constructor(
             }
         }
 
-    suspend fun getLikedTracks(token: String, offset: Int): Flow<Resource<TracksResult>> =
+    suspend fun getLikedTracks(token: String): Flow<Resource<TracksResult>> =
         flow {
             emit(Resource.progress())
             try {
-                val limit = 10 // page length
-                val response = apiService.getLikedTracks(token, limit, offset)
+                val response = apiService.getLikedTracks(token, pageSize, page)
+                page++
                 emit(Resource(response))
             } catch (exception: Exception) {
                 when (exception) {
@@ -54,4 +55,8 @@ class NetworkRepository @Inject constructor(
                 }
             }
         }
+
+    fun initPageToDefValue(){
+        page = 0
+    }
 }

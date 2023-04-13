@@ -12,7 +12,7 @@
         android:title="Search" />
     <item
         android:id="@+id/likedFragment"
-        android:icon="@drawable/baseline_folder_24"
+        android:icon="@drawable/baseline_favorite_24"
         android:title="Liked" />
     <item
         android:id="@+id/fourthFragment"

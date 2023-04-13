@@ -23,5 +23,5 @@ data class TracksResult(
     val total: Int,
 
     @SerializedName("items")
-    val items: List<TrackItem>
+    val items: List<TrackItemResult>
 )

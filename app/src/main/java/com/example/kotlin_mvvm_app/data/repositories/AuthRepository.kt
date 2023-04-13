@@ -18,7 +18,6 @@ import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
     private val authApiService: AuthApiService,
-    private val mDatabaseRepository: DatabaseRepository
 ) {
     suspend fun getAccessToken(code: String): Flow<Resource<AccessToken>> = flow {
         emit(Resource.progress())
@@ -44,13 +43,12 @@ class AuthRepository @Inject constructor(
         }
     }
 
-    suspend fun getRefreshToken(): Flow<Resource<AccessToken>> = flow {
+    suspend fun getRefreshToken(refreshToken: String): Flow<Resource<AccessToken>> = flow {
         emit(Resource.progress())
         try {
             val string = BuildConfig.CLIENT_ID + ":" + BuildConfig.CLIENT_SECRET
             val encodedString: String =
                 "Basic " + Base64.getEncoder().encodeToString(string.toByteArray())
-            val refreshToken: String? = mDatabaseRepository.getRefreshToken()
             val response = authApiService.getRefreshToken(encodedString, "refresh_token", refreshToken)
             emit(Resource(response))
         } catch (exception: Exception) {

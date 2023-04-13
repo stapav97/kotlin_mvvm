@@ -1,6 +1,7 @@
 package com.example.kotlin_mvvm_app.data.network
 
 import com.example.kotlin_mvvm_app.data.repositories.model.search.SearchResult
+import com.example.kotlin_mvvm_app.data.repositories.model.track.TrackItemResult
 import com.example.kotlin_mvvm_app.data.repositories.model.track.TracksResult
 import retrofit2.http.GET
 import retrofit2.http.Header
