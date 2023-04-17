@@ -38,12 +38,11 @@ class NetworkRepository @Inject constructor(
             }
         }
 
-    suspend fun getLikedTracks(token: String): Flow<Resource<TracksResult>> =
+    suspend fun getLikedTracks(token: String, offset: Int): Flow<Resource<TracksResult>> =
         flow {
             emit(Resource.progress())
             try {
-                val response = apiService.getLikedTracks(token, pageSize, page)
-                page++
+                val response = apiService.getLikedTracks(token, pageSize, offset)
                 emit(Resource(response))
             } catch (exception: Exception) {
                 when (exception) {

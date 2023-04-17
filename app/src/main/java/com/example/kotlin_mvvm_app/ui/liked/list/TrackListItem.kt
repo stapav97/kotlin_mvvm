@@ -13,12 +13,16 @@ data class TrackListItem(
     override fun isSame(another: RecyclerViewItem): Boolean {
         if (another !is TrackListItem) return false
 
-        return id == another.id
+        return true
     }
 
     override fun isSameContent(another: RecyclerViewItem): Boolean {
         if (another !is TrackListItem) return false
 
-        return false
+        if (id != another.id) return false
+        if (name != another.name) return false
+        if (type != another.type) return false
+
+        return true
     }
 }

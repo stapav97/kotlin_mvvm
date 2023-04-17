@@ -39,7 +39,7 @@ class LikedFragment : BaseFragment(R.layout.liked_fragment) {
         binding.likedTrackRecyclerView.adapter = mTracksAdapter
         binding.likedTrackRecyclerView.disableItemChangeAnimation()
         binding.likedTrackRecyclerView.setRecycledViewPool(RecyclerView.RecycledViewPool().apply {
-            setMaxRecycledViews(TracksAdapter.ViewType.TRACK, 20)
+            setMaxRecycledViews(TracksAdapter.ViewType.TRACK, 40)
         })
 
         // TODO implement scrollToEnd

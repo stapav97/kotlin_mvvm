@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LikedViewModel @Inject constructor(
@@ -32,7 +31,7 @@ class LikedViewModel @Inject constructor(
     data class State(
         val isProgress: Boolean = false,
         val trackList: MutableList<TrackListItem>,
-        val page: Int = 0,
+        val offset: Int = 0,
         val isLoadListEmpty: Boolean = false,
         val errorMessage: String = "",
         val searchText: String = "",
@@ -72,7 +71,7 @@ class LikedViewModel @Inject constructor(
         //TODO implement offset(page)
         mNetworkRepository.initPageToDefValue()
         viewModelScope.launch {
-            mNetworkRepository.getLikedTracks(oldState.token)
+            mNetworkRepository.getLikedTracks(oldState.token, oldState.offset)
                 .flowOn(Dispatchers.IO)
                 .onEach { flowResponse ->
                     flowResponse.peek(
@@ -84,8 +83,9 @@ class LikedViewModel @Inject constructor(
                             Logger.d(logTag, "getLikedTracks onData $data")
                             mState.value = oldState.copy(
                                 isProgress = false,
-                                trackList = trackToRecycleItem(data.items),
+                                trackList = data.items.map { it.toRecycleItemMapper() }.toMutableList(),
                                 isLoadListEmpty = data.items.isEmpty(),
+                                offset = data.offset + data.limit
                             )
                         },
                         onError = { message ->
@@ -106,7 +106,7 @@ class LikedViewModel @Inject constructor(
         val oldState = mState.value!!
 
         viewModelScope.launch {
-            mNetworkRepository.getLikedTracks(oldState.token)
+            mNetworkRepository.getLikedTracks(oldState.token, oldState.offset)
                 .flowOn(Dispatchers.IO)
                 .onEach { flowResponse ->
                     flowResponse.peek(
@@ -118,11 +118,13 @@ class LikedViewModel @Inject constructor(
                             Logger.d(logTag, "getLikedTracks onData $data")
 
                             val newList = oldState.trackList.toMutableList()
-                            newList.addAll(trackToRecycleItem(data.items))
+                            newList.addAll(data.items.map { it.toRecycleItemMapper() })
+
                             mState.value = oldState.copy(
                                 isProgress = false,
                                 trackList = newList,
                                 isLoadListEmpty = data.items.isEmpty(),
+                                offset = data.offset + data.limit
                             )
                         },
                         onError = { message ->
@@ -156,19 +158,12 @@ class LikedViewModel @Inject constructor(
         mState.value = oldState.copy(errorMessage = "")
     }
 
-    private fun trackToRecycleItem(trackItemList: List<TrackItemResult>): MutableList<TrackListItem> {
-        val list: MutableList<TrackListItem> = mutableListOf()
-
-        trackItemList.forEach {
-            list.add(
-                TrackListItem(
-                    id = it.track.id,
-                    name = it.track.name,
-                    type = it.track.type,
-                )
-            )
-        }
-        return list
+    private fun TrackItemResult.toRecycleItemMapper(): TrackListItem {
+        return TrackListItem(
+            id = this.track.id,
+            name = this.track.name,
+            type = this.track.type,
+        )
     }
-
 }
+
