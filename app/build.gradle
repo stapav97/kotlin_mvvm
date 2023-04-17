@@ -30,7 +30,7 @@ android {
             buildConfigField "String", "CLIENT_SECRET", '"3837a661070a44a38d08611777681074"'
             buildConfigField "String", "API_BASE_URL ", '"https://api.spotify.com/v1/"'
             buildConfigField "String", "API_AUTH_URL", '"https://accounts.spotify.com/api/"'
-            buildConfigField "String", "AUTHORIZATION_CALLBACK_URL", '"https://spotyspy/callback"'
+            buildConfigField "String", "AUTHORIZATION_CALLBACK_URL", '"spotyspy://authorization_callback"'
         }
     }
     compileOptions {
