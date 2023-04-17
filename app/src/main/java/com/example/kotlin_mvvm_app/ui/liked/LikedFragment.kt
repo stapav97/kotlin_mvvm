@@ -11,9 +11,9 @@ import com.example.kotlin_mvvm_app.ui.liked.list.TrackListItem
 import com.example.kotlin_mvvm_app.ui.liked.list.TrackListViewHolder
 import com.example.kotlin_mvvm_app.ui.liked.list.TracksAdapter
 import com.example.kotlin_mvvm_app.utils.binding.viewBinding
-import com.example.kotlin_mvvm_app.utils.wrappers.disableItemChangeAnimation
-import com.example.kotlin_mvvm_app.utils.wrappers.gone
-import com.example.kotlin_mvvm_app.utils.wrappers.show
+import com.example.kotlin_mvvm_app.utils.disableItemChangeAnimation
+import com.example.kotlin_mvvm_app.utils.gone
+import com.example.kotlin_mvvm_app.utils.show
 
 class LikedFragment : BaseFragment(R.layout.liked_fragment) {
 
@@ -26,7 +26,7 @@ class LikedFragment : BaseFragment(R.layout.liked_fragment) {
         mViewModel = newViewModelWithArgs()
 
         mTracksAdapter = TracksAdapter(
-            contractTrack = object : TrackListViewHolder.Contract {
+            contractTrack = object : TrackListViewHolder.Contract{
                 override fun onClickItem(item: TrackListItem) {
                     if (mLastConsumedState != null && !mLastConsumedState!!.isProgress)
                         mViewModel.onListItemClick(item)
@@ -39,11 +39,10 @@ class LikedFragment : BaseFragment(R.layout.liked_fragment) {
         binding.likedTrackRecyclerView.adapter = mTracksAdapter
         binding.likedTrackRecyclerView.disableItemChangeAnimation()
         binding.likedTrackRecyclerView.setRecycledViewPool(RecyclerView.RecycledViewPool().apply {
-            setMaxRecycledViews(TracksAdapter.ViewType.TRACK, 40)
+            setMaxRecycledViews(TracksAdapter.ViewType.TRACK, 20)
         })
 
-        // TODO implement scrollToEnd
-        binding.likedTrackRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.likedTrackRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount = layoutManager.childCount
                 val totalItemCount = layoutManager.itemCount
@@ -54,6 +53,7 @@ class LikedFragment : BaseFragment(R.layout.liked_fragment) {
             }
         })
 
+        mViewModel.observeCommands(viewLifecycleOwner, this)
         observeState()
     }
 

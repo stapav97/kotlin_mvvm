@@ -1,5 +1,6 @@
 package com.example.kotlin_mvvm_app.ui.liked
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,6 +9,7 @@ import com.example.kotlin_mvvm_app.data.repositories.NetworkRepository
 import com.example.kotlin_mvvm_app.data.repositories.model.track.TrackItemResult
 import com.example.kotlin_mvvm_app.ui.MainViewCommandProcessor
 import com.example.kotlin_mvvm_app.ui.base.BaseViewModel
+import com.example.kotlin_mvvm_app.ui.base.commands.ViewCommandProcessor
 import com.example.kotlin_mvvm_app.ui.liked.list.TrackListItem
 import com.example.kotlin_mvvm_app.utils.Logger
 import com.example.kotlin_mvvm_app.utils.Reporter
@@ -42,8 +44,12 @@ class LikedViewModel @Inject constructor(
         }
     }
 
-    private val mState: MutableLiveData<State>
+    private val mCommands: ViewCommandProcessor<LikedFragment> = ViewCommandProcessor()
+    fun observeCommands(owner: LifecycleOwner, view: LikedFragment) {
+        mCommands.observe(owner, view)
+    }
 
+    private val mState: MutableLiveData<State>
     fun state(): LiveData<State> = mState
 
     init {
@@ -67,11 +73,8 @@ class LikedViewModel @Inject constructor(
 
         val oldState = mState.value!!
 
-
-        //TODO implement offset(page)
-        mNetworkRepository.initPageToDefValue()
         viewModelScope.launch {
-            mNetworkRepository.getLikedTracks(oldState.token, oldState.offset)
+            mNetworkRepository.getLikedTracks(oldState.token, 0)
                 .flowOn(Dispatchers.IO)
                 .onEach { flowResponse ->
                     flowResponse.peek(
@@ -85,7 +88,7 @@ class LikedViewModel @Inject constructor(
                                 isProgress = false,
                                 trackList = data.items.map { it.toRecycleItemMapper() }.toMutableList(),
                                 isLoadListEmpty = data.items.isEmpty(),
-                                offset = data.offset + data.limit
+                                offset = 0 + data.limit
                             )
                         },
                         onError = { message ->
@@ -149,6 +152,7 @@ class LikedViewModel @Inject constructor(
 
     fun onListItemClick(item: TrackListItem) {
         Reporter.userAction(logTag, "onListItemClick")
+
     }
 
     fun errorMessageShown() {

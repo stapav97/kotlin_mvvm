@@ -7,16 +7,12 @@ import com.example.kotlin_mvvm_app.databinding.TracklistItemBinding
 import com.example.kotlin_mvvm_app.utils.Logger
 import com.example.kotlin_mvvm_app.utils.logTag
 
-class TrackListViewHolder(
+class TrackListViewHolder (
     private val mBinding: TracklistItemBinding,
     private val mContract: Contract?,
-) : RecyclerView.ViewHolder(mBinding.root) {
+) : RecyclerView.ViewHolder(mBinding.root){
 
     private val logTag = logTag()
-
-    init {
-        Logger.d(logTag, "onCreate  ${hashCode()}")
-    }
 
     interface Contract {
         fun onClickItem(item: TrackListItem)
@@ -53,6 +49,5 @@ class TrackListViewHolder(
         mBinding.id.text = item.id
         mBinding.name.text = item.name
         mBinding.type.text = item.type
-
     }
 }

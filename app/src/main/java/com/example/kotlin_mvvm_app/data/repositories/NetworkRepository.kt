@@ -18,8 +18,8 @@ import javax.inject.Inject
 class NetworkRepository @Inject constructor(
     private val apiService: ApiService
 ) {
-    private val pageSize: Int = 30
-    private var page: Int = 0;
+    private val pageSize: Int = 20
+
     suspend fun getSearchResult(token: String, q: String, type: String, offset: Int): Flow<Resource<SearchResult>> =
         flow {
             emit(Resource.progress())
@@ -55,7 +55,4 @@ class NetworkRepository @Inject constructor(
             }
         }
 
-    fun initPageToDefValue(){
-        page = 0
-    }
 }

@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_mvvm_app.ui.base.recyclerview.BaseRecyclerViewAdapter
 import com.example.kotlin_mvvm_app.ui.base.recyclerview.items.RecyclerViewItem
+import com.example.kotlin_mvvm_app.ui.liked.list.TrackListViewHolder.Companion.newInstance
 
 class TracksAdapter(
     var contractTrack: TrackListViewHolder.Contract? = null,
@@ -15,8 +16,7 @@ class TracksAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ViewType.TRACK -> TrackListViewHolder.newInstance(mInflater!!, parent, contractTrack)
-
+            ViewType.TRACK -> newInstance(mInflater!!, parent, contractTrack)
             else -> super.onCreateViewHolder(parent, viewType)
         }
     }
@@ -24,7 +24,7 @@ class TracksAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             ViewType.TRACK -> (holder as TrackListViewHolder).bind(getItem(position) as TrackListItem)
-            else -> super.onBindViewHolder(holder, position)
+
         }
     }
 }

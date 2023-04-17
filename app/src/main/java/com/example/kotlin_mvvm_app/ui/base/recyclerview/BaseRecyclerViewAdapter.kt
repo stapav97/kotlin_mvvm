@@ -1,9 +1,10 @@
 package com.example.kotlin_mvvm_app.ui.base.recyclerview
 
+import com.example.kotlin_mvvm_app.ui.base.recyclerview.items.RecyclerViewItem
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlin_mvvm_app.ui.base.recyclerview.items.RecyclerViewItem
 
 abstract class BaseRecyclerViewAdapter<Item : RecyclerViewItem>(
     var list: List<Item> = emptyList(),
@@ -36,7 +37,6 @@ abstract class BaseRecyclerViewAdapter<Item : RecyclerViewItem>(
         mInflater = null
         super.onDetachedFromRecyclerView(recyclerView)
     }
-
 
     //==============================================================================================
     // *** VH Lifecycle ***

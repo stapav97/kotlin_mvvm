@@ -3,7 +3,7 @@ package com.example.kotlin_mvvm_app.ui.base.recyclerview
 import androidx.recyclerview.widget.DiffUtil
 import com.example.kotlin_mvvm_app.ui.base.recyclerview.items.RecyclerViewItem
 
-class DiffCallback (
+class DiffCallback(
     private val oldList: List<RecyclerViewItem>,
     private val newList: List<RecyclerViewItem>
 ) : DiffUtil.Callback() {
@@ -17,6 +17,7 @@ class DiffCallback (
 
     override fun areContentsTheSame(oldPos: Int, newPos: Int) =
         oldList[oldPos].isSameContent(newList[newPos])
+
 }
 
 fun <T : RecyclerViewItem> BaseRecyclerViewAdapter<T>.applyDiffUtil(newList: List<T>) {
@@ -24,3 +25,4 @@ fun <T : RecyclerViewItem> BaseRecyclerViewAdapter<T>.applyDiffUtil(newList: Lis
     list = newList
     diffResult.dispatchUpdatesTo(this)
 }
+

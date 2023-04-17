@@ -1,4 +1,4 @@
-package com.example.kotlin_mvvm_app.utils.wrappers
+package com.example.kotlin_mvvm_app.utils
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
