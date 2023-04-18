@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "268711120050",
+    "project_id": "spotyspy",
+    "storage_bucket": "spotyspy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268711120050:android:548bd148bd944473458dab",
+        "android_client_info": {
+          "package_name": "com.example.kotlin_mvvm_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268711120050-59g5jr5neq97tdhgp251tqf0jvs83n6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu_R2nbWt96yeHOsih-5hDdzT_pyaOJwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268711120050-59g5jr5neq97tdhgp251tqf0jvs83n6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

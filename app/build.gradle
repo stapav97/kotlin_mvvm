@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -50,7 +52,7 @@ dependencies {
     def room_version = "2.5.1"
     def nav_version = "2.5.3"
 
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     testImplementation 'junit:junit:4.13.2'
@@ -76,5 +78,11 @@ dependencies {
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.6'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.2'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
+
 
 }

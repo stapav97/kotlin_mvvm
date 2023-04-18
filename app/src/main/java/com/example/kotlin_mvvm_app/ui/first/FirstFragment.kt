@@ -15,5 +15,8 @@ class FirstFragment : BaseFragment(R.layout.first_fragment) {
 
         mViewModel = newViewModelWithArgs()
 
+        binding.crashButton.setOnClickListener{
+            throw RuntimeException("Test Crash") // Force a crash
+        }
     }
 }

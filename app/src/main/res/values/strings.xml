@@ -19,4 +19,5 @@
     <string name="search">Search</string>
     <string name="search_list_empty">Search list empty</string>
     <string name="liked_list_empty">Liked list empty</string>
+    <string name="default_notification_channel_id">com.example.kotlin_mvvm_app.services</string>
 </resources>
