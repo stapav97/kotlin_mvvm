@@ -3,6 +3,7 @@ package com.example.kotlin_mvvm_app.ui.first
 import com.example.kotlin_mvvm_app.R
 import com.example.kotlin_mvvm_app.databinding.FirstFragmentBinding
 import com.example.kotlin_mvvm_app.ui.base.BaseFragment
+import com.example.kotlin_mvvm_app.ui.base.newViewModelWithArgs
 import com.example.kotlin_mvvm_app.utils.binding.viewBinding
 
 class FirstFragment : BaseFragment(R.layout.first_fragment) {

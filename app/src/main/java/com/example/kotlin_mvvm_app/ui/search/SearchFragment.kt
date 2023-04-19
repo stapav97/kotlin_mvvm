@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.example.kotlin_mvvm_app.R
 import com.example.kotlin_mvvm_app.databinding.SearchFragmentBinding
 import com.example.kotlin_mvvm_app.ui.base.BaseFragment
+import com.example.kotlin_mvvm_app.ui.base.newViewModelWithArgs
 import com.example.kotlin_mvvm_app.utils.binding.viewBinding
 import com.example.kotlin_mvvm_app.utils.gone
 import com.example.kotlin_mvvm_app.utils.show

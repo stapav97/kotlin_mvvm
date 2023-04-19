@@ -4,7 +4,6 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import com.example.kotlin_mvvm_app.utils.logTag
 
 interface Command<View> {
     fun execute(view: View)
@@ -19,11 +18,19 @@ inline fun <reified V> ViewCommandProcessor<V>.enqueue(crossinline command: (vie
     })
 }
 
+/**
+ * Lifecycle-aware action processor. Executes actions when View is [Lifecycle.State.RESUMED]
+ * or put them into queue and do it later.
+ *
+ * For stateless actions (Side Effects) e.g. showToast or hideKeyboard.
+ * Replacement for so called "SingleLiveEvent" in MVVM
+ */
 open class ViewCommandProcessor<View> : DefaultLifecycleObserver {
 
-    private val logTag = logTag()
-
     private val mCommands = mutableListOf<Command<View>>()
+    private var mOwner: LifecycleOwner? = null
+    private var mView: View? = null
+
 
     @MainThread
     fun enqueue(command: Command<View>) {
@@ -36,23 +43,26 @@ open class ViewCommandProcessor<View> : DefaultLifecycleObserver {
 
     private fun executeCommands() {
         if (mCommands.isEmpty()) return
-
-        val iterator = mCommands.iterator()
+        val localList = mCommands
+        val iterator = localList.iterator()
         while (iterator.hasNext()) {
             val command = iterator.next()
-
-            command.execute(mView!!)
+            if (mView != null) {
+                command.execute(mView!!)
+            }
         }
         mCommands.clear()
-
     }
-
-    private var mOwner: LifecycleOwner? = null
-    private var mView: View? = null
 
     fun observe(owner: LifecycleOwner, view: View) {
         if (owner.lifecycle.currentState == Lifecycle.State.DESTROYED) {
             return
+        }
+
+        if (mOwner != null) {
+            mOwner!!.lifecycle.removeObserver(this)
+            mOwner = null
+            mView = null
         }
 
         mOwner = owner

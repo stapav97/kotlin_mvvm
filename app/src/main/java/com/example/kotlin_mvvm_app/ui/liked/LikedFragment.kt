@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_mvvm_app.R
 import com.example.kotlin_mvvm_app.databinding.LikedFragmentBinding
 import com.example.kotlin_mvvm_app.ui.base.BaseFragment
+import com.example.kotlin_mvvm_app.ui.base.newViewModelWithArgs
 import com.example.kotlin_mvvm_app.ui.base.recyclerview.CustomLinearLayoutManager
 import com.example.kotlin_mvvm_app.ui.base.recyclerview.applyDiffUtil
 import com.example.kotlin_mvvm_app.ui.liked.list.TrackListItem

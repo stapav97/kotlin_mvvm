@@ -4,6 +4,7 @@ import androidx.navigation.findNavController
 import com.example.kotlin_mvvm_app.R
 import com.example.kotlin_mvvm_app.databinding.SplashFragmentBinding
 import com.example.kotlin_mvvm_app.ui.base.BaseFragment
+import com.example.kotlin_mvvm_app.ui.base.newViewModelWithArgs
 import com.example.kotlin_mvvm_app.utils.Reporter
 import com.example.kotlin_mvvm_app.utils.binding.viewBinding
 import com.example.kotlin_mvvm_app.utils.logTag

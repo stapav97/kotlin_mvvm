@@ -11,13 +11,17 @@ import com.example.kotlin_mvvm_app.utils.Reporter
 import com.example.kotlin_mvvm_app.utils.logTag
 import javax.inject.Inject
 
+
 abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
+
     private val logTag = logTag()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+
     protected open fun initUI() = Unit
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -63,11 +67,11 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
         super.onDestroyView()
         Reporter.appAction(logTag, "onDestroyView")
     }
+}
 
-    /**
-     * Instantiate ViewModel and set common arguments to it
-     */
-    inline fun <reified VM : BaseViewModel> BaseFragment.newViewModelWithArgs(): VM {
-        return ViewModelProvider(this, viewModelFactory).get(VM::class.java)
-    }
+/**
+ * Instantiate ViewModel and set common arguments to it
+ */
+inline fun <reified VM : BaseViewModel> BaseFragment.newViewModelWithArgs(): VM {
+    return ViewModelProvider(this, viewModelFactory).get(VM::class.java)
 }
