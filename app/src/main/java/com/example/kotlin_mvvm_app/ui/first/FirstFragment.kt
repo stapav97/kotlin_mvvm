@@ -3,8 +3,11 @@ package com.example.kotlin_mvvm_app.ui.first
 import android.Manifest
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -46,8 +49,15 @@ class FirstFragment : BaseFragment(R.layout.first_fragment) {
                 // TODO permission granted
             } else {
                 if (!shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-                    // TODO permission deny forever
+                    // TODO permission deny forever, open application settings
                     Toast.makeText(requireContext(), "Deny forever", Toast.LENGTH_LONG).show()
+                    val intent = Intent(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", requireContext().packageName, null)
+                    )
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+
+
                 } else {
                     // TODO permission deny once
                     Toast.makeText(requireContext(), "Deny once", Toast.LENGTH_LONG).show()
@@ -67,7 +77,8 @@ class FirstFragment : BaseFragment(R.layout.first_fragment) {
                 }
                 else -> {
                     //TODO request permission
-                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)}
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
             }
         }
     }
