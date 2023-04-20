@@ -1,5 +1,6 @@
 package com.example.kotlin_mvvm_app.ui.splash
 
+import android.content.Context
 import androidx.navigation.findNavController
 import com.example.kotlin_mvvm_app.R
 import com.example.kotlin_mvvm_app.databinding.SplashFragmentBinding
@@ -17,9 +18,13 @@ class SplashFragment : BaseFragment(R.layout.splash_fragment) {
 
     private lateinit var mViewModel: SplashViewModel
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mViewModel = newViewModelWithArgs()
+    }
+
     override fun initUI() {
         super.initUI()
-        mViewModel = newViewModelWithArgs()
         observeState()
     }
 

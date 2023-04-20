@@ -1,5 +1,6 @@
 package com.example.kotlin_mvvm_app.ui.search
 
+import android.content.Context
 import android.widget.SearchView
 import android.widget.Toast
 import com.example.kotlin_mvvm_app.R
@@ -15,10 +16,13 @@ class SearchFragment : BaseFragment(R.layout.search_fragment) {
     private val binding: SearchFragmentBinding by viewBinding(SearchFragmentBinding::bind)
     private lateinit var mViewModel: SearchViewModel
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mViewModel = newViewModelWithArgs()
+    }
+
     override fun initUI() {
         super.initUI()
-
-        mViewModel = newViewModelWithArgs()
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextChange(query: String): Boolean {

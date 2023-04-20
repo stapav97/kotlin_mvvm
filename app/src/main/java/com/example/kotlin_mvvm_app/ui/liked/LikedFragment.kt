@@ -1,5 +1,6 @@
 package com.example.kotlin_mvvm_app.ui.liked
 
+import android.content.Context
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_mvvm_app.R
@@ -22,12 +23,16 @@ class LikedFragment : BaseFragment(R.layout.liked_fragment) {
     private lateinit var mViewModel: LikedViewModel
     private lateinit var mTracksAdapter: TracksAdapter
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mViewModel = newViewModelWithArgs()
+    }
+
     override fun initUI() {
         super.initUI()
-        mViewModel = newViewModelWithArgs()
 
         mTracksAdapter = TracksAdapter(
-            contractTrack = object : TrackListViewHolder.Contract{
+            contractTrack = object : TrackListViewHolder.Contract {
                 override fun onClickItem(item: TrackListItem) {
                     if (mLastConsumedState != null && !mLastConsumedState!!.isProgress)
                         mViewModel.onListItemClick(item)
@@ -43,7 +48,7 @@ class LikedFragment : BaseFragment(R.layout.liked_fragment) {
             setMaxRecycledViews(TracksAdapter.ViewType.TRACK, 20)
         })
 
-        binding.likedTrackRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        binding.likedTrackRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount = layoutManager.childCount
                 val totalItemCount = layoutManager.itemCount

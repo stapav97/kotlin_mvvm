@@ -26,9 +26,13 @@ class FirstFragment : BaseFragment(R.layout.first_fragment) {
     private lateinit var mViewModel: FirstViewModel
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mViewModel = newViewModelWithArgs()
+    }
+
     override fun initUI() {
         super.initUI()
-        mViewModel = newViewModelWithArgs()
 
         requestPermissionLauncher = initializeRequestPermissionLauncher()
 
