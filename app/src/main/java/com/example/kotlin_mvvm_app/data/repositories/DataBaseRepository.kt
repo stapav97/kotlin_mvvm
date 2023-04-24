@@ -1,6 +1,7 @@
 package com.example.kotlin_mvvm_app.data.repositories
 
 import com.example.kotlin_mvvm_app.data.db.AppDatabase
+import com.example.kotlin_mvvm_app.data.db.entity.SearchHistory
 import com.example.kotlin_mvvm_app.data.db.entity.User
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -22,5 +23,9 @@ class DatabaseRepository @Inject constructor(
 
     fun getRefreshToken(): Flow<String?> {
         return mDatabase.userDao().getRefreshToken()
+    }
+
+    suspend fun insertSearchHistory(searchHistory: SearchHistory) {
+        mDatabase.searchHistoryDao().insertSearchHistory(searchHistory)
     }
 }

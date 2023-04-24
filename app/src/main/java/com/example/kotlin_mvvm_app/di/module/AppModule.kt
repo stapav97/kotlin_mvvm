@@ -19,7 +19,9 @@ class AppModule {
         context,
         AppDatabase::class.java,
         "app-database"
-    ).setQueryExecutor(executors.diskExecutor).build()
+    ).setQueryExecutor(executors.diskExecutor)
+//        .fallbackToDestructiveMigration() //if need migration room just recreate schema
+        .build()
 
     @Singleton
     @Provides
